@@ -122,11 +122,10 @@ var infobox = (function(){
 		_table_DBinfo.select("tbody").remove();
 	 	var info_table = _table_DBinfo.append("tbody");
 	 	if (d.type=='vertex'){
-		 	for (var key in d.properties){
-		 		_display_vertex_properties(key,d.properties[key],info_table)
-		 	}
-		}
-		else {
+			Object.keys(d.properties).forEach( function(prop) {
+				_display_vertex_properties(prop,d.properties[prop],info_table)
+			})
+		} else {
 		 	for (var key in d.properties){
 		 		var new_info_row = info_table.append("tr");
 	 			new_info_row.append("td").text(key);
@@ -152,12 +151,11 @@ var infobox = (function(){
  			} else {
  				var new_info_row = info_table.append("tr");
  				new_info_row.append("td").text(key).style("font-size",_font_size);
- 				new_info_row.append("td").text(value[subkey].value).style("font-size",_font_size);
+				new_info_row.append("td").text(value[subkey]).style("font-size",_font_size);
  				new_info_row.append("td").text('').style("font-size",_font_size);
  			}
 		}
 	}
-
 
 	return {
 		create : create,
