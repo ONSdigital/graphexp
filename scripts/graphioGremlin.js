@@ -414,13 +414,9 @@ var graphioGremlin = (function(){
 		var nodes=[], links=[];
 		for (var key in data){
 			data[key].forEach(function (item) {
-				if (idIndex(nodes, item.id) !== null) {
-					continue
-				}
-
-				if (item.type=="vertex") // if vertex and not already in the list
+				if (item.type=="vertex" && idIndex(nodes,item.id) == null) // if vertex and not already in the list
 					nodes.push(extract_infov2(item));
-				if (item.type=="edge")
+				if (item.type=="edge" && idIndex(links,item.id) == null)
 					links.push(extract_infov2(item));
 			});
 		}
